@@ -1,0 +1,33 @@
+{
+	"name": "fullstack-project",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"dbpush": "drizzle-kit push:pg"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/kit": "^1.20.4",
+		"drizzle-kit": "^0.19.13",
+		"svelte": "^4.0.5",
+		"vite": "^4.4.2"
+	},
+	"type": "module",
+	"dependencies": {
+		"@lucia-auth/adapter-postgresql": "^2.0.2",
+		"@prisma/client": "^5.5.2",
+		"bcrypt": "^5.1.1",
+		"dizzle": "^1.0.4",
+		"dotenv": "^16.3.1",
+		"drizzle-orm": "^0.28.6",
+		"gsap": "^3.12.2",
+		"lucia": "^2.7.3",
+		"particles.js": "^2.0.0",
+		"pg": "^8.11.3",
+		"splitting": "^1.0.6",
+		"svelte-spa-router": "^3.3.0"
+	}
+}
