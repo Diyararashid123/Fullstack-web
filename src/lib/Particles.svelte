@@ -20,7 +20,7 @@
           anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false },
         },
         size: {
-          value: 10,
+          value: 5,
           random: true,
           anim: { enable: false, speed: 40, size_min: 0.1, sync: false },
         },
@@ -46,6 +46,7 @@
         detect_on: "canvas",
         events: {
           onhover: { enable: true, mode: "bubble" },
+          onclick: { enable: true, mode: "repulse" },
           resize: true,
         },
         modes: {
@@ -59,8 +60,6 @@
       retina_detect: true,
     });
 
-    // Additional JS code for particles
-    // ... (if needed)
   });
 </script>
 

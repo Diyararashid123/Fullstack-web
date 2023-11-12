@@ -4,15 +4,10 @@
   import { fly } from "svelte/transition";
   import { quintOut } from "svelte/easing";
   
-  //import Guide from "../components/Guide.svelte";
-  let showGuide = false;
-  let step = 0;
 </script>
 
 <Header/>
-<!-- {#if showGuide}
-  <Guide bind:step />
-{/if} -->
+
 <div class="main-container">
   <div class="content">
       <div class="robot-text"
@@ -34,24 +29,32 @@
 </div>
 
 <style>
- .main-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: calc(100vh - 150px); 
-      gap: 1rem;
-      padding: 1rem 0;
-  }
+    
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  .content {
-      display: flex;
-      justify-content: center; 
-      align-items: center;
-      gap: 1rem;
-      width: 100%;
-      max-width: 65rem; 
-  }
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 150px); 
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.content {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 65rem; 
+  padding-bottom:5rem;
+}
 
   .button-container {
       display: flex;
@@ -59,6 +62,7 @@
       align-items: center;
       width: 100%;
   }
+  
   @media (min-width: 760px) and (max-width: 1500px) {
       .profile-pic {
           flex: 1;

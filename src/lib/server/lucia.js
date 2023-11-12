@@ -24,5 +24,3 @@ export const auth = lucia({
         };
     }
 });
-
-console.log(auth)
