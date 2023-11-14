@@ -24,7 +24,7 @@
 
   <div class="button-container"
       in:fly={{ delay: 800, duration: 2000, y: 500, opacity: 0, easing: quintOut }}>
-      <CustomBtn content="Go to Order" url={"/login"}/>
+      <CustomBtn content="Go to Order" url={"/Order"}/>
   </div>
 </div>
 

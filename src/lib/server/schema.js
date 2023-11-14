@@ -43,21 +43,10 @@ export const keysTable = pgTable("user_key", {
     })
 });
 
-export const lettersTable = pgTable("letters", {
-    id: integer("id").primaryKey(),
-    letter: varchar("letter", {
-        length: 1
-    }).notNull(),
+export const lettersTable = pgTable("letter", {
+    charachter: varchar("character", {
+        length: 1 
+    }).primaryKey(),
     quantity: integer("quantity").notNull()
 });
 
-
-export const ordersTable = pgTable("orders", {
-    id: integer("id").primaryKey(),
-    userId: varchar("user_id", {
-        length: 15
-    }).notNull().references(() => usersTable.id),
-    letterId: integer("letter_id").notNull().references(() => lettersTable.id),
-    orderDate: timestamp("order_date").defaultNow(),
-    quantityOrdered: integer("quantity_ordered").notNull()
-});
