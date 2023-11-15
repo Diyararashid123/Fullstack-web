@@ -1,34 +1,31 @@
 import { dbClient } from "$lib/server/db"
 import { ordersTable, lettersTable } from "$lib/server/schema"
-
+import { v4 as uuidv4 } from 'uuid';
 export const load = async()=>{
     const letters = await dbClient.select().from(lettersTable)
     return{
         letters
     }
 }
+export const actions = {
+    default: async ({request}) => {
+        const data = await request.formData();
+        const OrderContent = data.get("order-content")?.toString();
+        const orderId = uuidv4(); 
+        const lettersArray = OrderContent.split('');
+        const lettersString = lettersArray.join(','); 
 
-export const actions = async (request) => {
-    const orderData = JSON.parse(request.body);
-    const orderId = generateOrderId(); // Function to generate unique order IDs
+        await dbClient.insert(ordersTable, {
+            orderId: orderId,
+            letters: lettersString,
+            orderDate: new Date(),
+        });
 
-    // Assuming orderData has userId and letters
-    const userId = orderData.userId;
-    const lettersString = orderData.letters; // String like "ABBA"
-
-    // Insert order data into the orders table
-    await dbClient.insert(ordersTable, {
-        orderId: orderId,
-        userId: userId,
-        letters: lettersString,
-        orderDate: new Date(),
-        // other fields...
-    });
-
-    return {
-        status: 200,
-        body: {
-            message: "Order placed successfully"
-        }
-    };
+        return {
+            status: 200,
+            body: {
+                message: "Order placed successfully"
+            }
+        };
+    }
 };
