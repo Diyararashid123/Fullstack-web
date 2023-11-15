@@ -50,3 +50,18 @@ export const lettersTable = pgTable("letter", {
     quantity: integer("quantity").notNull()
 });
 
+export const ordersTable = pgTable("order", {
+    orderId: varchar("order_id", {
+        length: 20
+    }).primaryKey(),
+    userId: varchar("user_id", {
+        length: 15
+    })
+    .notNull()
+    .references(() => usersTable.id),
+    letters: varchar("letters", {
+        length: 255 // Adjust the length as needed
+    }).notNull(),
+    orderDate: timestamp("order_date"),
+    // other fields like totalCost, orderStatus, etc.
+});

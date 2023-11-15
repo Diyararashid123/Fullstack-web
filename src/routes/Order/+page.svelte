@@ -1,73 +1,89 @@
 <script>
-  export let data;
+  export let data; // Data received from the server
+  import { fly } from 'svelte/transition';
+  import { quintOut } from 'svelte/easing';
 
-  let selectedLetters = [];
-  let orderPlaced = false;
-
+  let selectedLetters = []; // Array to store selected letters
+  const userId = "testUserId";
+  // Function to add a letter to the selectedLetters array
   function selectLetter(letter) {
     if (selectedLetters.length < 4) {
-      selectedLetters.push(letter);
+      selectedLetters = [...selectedLetters, letter];
     } else {
       console.log("You can't select more than 4 letters!");
     }
   }
-
-  function deleteLetter(index) {
-    selectedLetters.splice(index, 1);
-  }
-
-  async function placeOrder() {
-    const word = selectedLetters.join('');
-    const response = await fetch('/place_order', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ word })
-    });
-    
-    if (response.ok) {
-      const result = await response.json();
-      if (result.status === 'success') {
-        orderPlaced = true;
-      } else {
-        console.error("Error placing order:", result.message);
-      }
-    } else {
-      console.error('Failed to place order');
+  function handleKeyPress(event, index) {
+    // Example: Trigger deleteLetter when the Enter key is pressed
+    if (event.key === 'Enter') {
+      deleteLetter(index);
     }
   }
-  
-</script>
+  // Function to remove a letter from the selectedLetters array
+  function deleteLetter(index) {
+    selectedLetters = selectedLetters.filter((_, i) => i !== index);
+  }
 
+
+
+  async function placeOrder() {
+    if (selectedLetters.length === 0) {
+        console.error('No letters selected');
+        return;
+    }
+
+    const lettersString = selectedLetters.join('');
+    const userId = "testUserId"; // Replace with actual user ID in a real app
+
+    try {
+        const response = await fetch('/Order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: userId,
+                letters: lettersString
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to place order');
+        }
+
+        const result = await response.json();
+        console.log('Order placed:', result.message);
+    } catch (error) {
+        console.error('Error placing order:', error.message);
+    }
+}
+
+
+
+
+</script>
 <section class="order-form">
   <form id="robot-order-form">
-    {#if !orderPlaced}
-      <fieldset>
-        <legend>Select Items:</legend>
-        <div class="alphabet-selection">
-          {#each data.letters as letter}
-            <button on:click={() => selectLetter(letter.charachter)}>{letter.charachter}</button>
-          {/each}
-        </div>
-      </fieldset>
-      <div id="orderModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <p>
-            Order submitted! <span class="big-emoji">&#x1F642;</span>Thanks for your
-            order.
-          </p>
-        </div>
-      </div>
-      <div class="selected-items">
-        {#each selectedLetters as item, index}
-          <span on:click={() => deleteLetter(index)}>{item}</span>
+    <fieldset>
+      <legend>Select Items:</legend>
+      <div class="alphabet-selection">
+        {#each data.letters as letter}
+          <button type="button" on:click={() => selectLetter(letter.charachter)}>
+            {letter.charachter}
+          </button>
         {/each}
       </div>
-
-      <button type="button" on:click={placeOrder}>Place Order</button>
-    {:else}
-      <div class="thanks-message">Thanks for your order! <span class="big-emoji">&#x1F642;</span></div>
-    {/if}
+    </fieldset>
+    <div class="selected-items">
+      {#each selectedLetters as item, index}
+        <span 
+          tabindex="0"  
+          role="button" 
+          on:click={() => deleteLetter(index)}
+          on:keypress={(event) => handleKeyPress(event, index)}
+        >
+          {item}
+        </span>
+      {/each}
+    </div>
   </form>
 
   {#key animate}
@@ -100,15 +116,8 @@
       </footer>
     </div>
   {/key}
-  <div id="orderModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p>
-        Order submitted! <span class="big-emoji">&#x1F642;</span>Thanks for your
-        order.
-      </p>
-    </div>
-  </div>
+  <button type="button" on:click={placeOrder} class="order-button">Place Order</button>
+
 </section>
 
 <!-- Add your styles here -->
