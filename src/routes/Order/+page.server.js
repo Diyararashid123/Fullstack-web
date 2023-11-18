@@ -12,14 +12,13 @@ export const actions = {
         const data = await request.formData();
         const OrderContent = data.get("order-content")?.toString();
         const orderId = uuidv4(); 
-        const lettersArray = OrderContent.split('');
-        const lettersString = lettersArray.join(','); 
-
-        await dbClient.insert(ordersTable, {
+       
+        const newOrder = {
             orderId: orderId,
-            letters: lettersString,
-            orderDate: new Date(),
-        });
+            letters: OrderContent,
+            orderDate: new Date()
+        }
+        const insert = await dbClient.insert(ordersTable).values(newOrder)
 
         return {
             status: 200,

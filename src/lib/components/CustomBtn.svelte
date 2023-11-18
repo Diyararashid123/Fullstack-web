@@ -14,8 +14,8 @@ height: 80px;
 margin-top: 3rem;
 text-align: center;
 line-height: 80px;
-color: #003366; 
-border: 4px solid #a8e0ff; 
+color: #000; 
+border: 4px solid #6d4c41; 
 border-radius: 2rem;
 font-size: 24px;
 letter-spacing: 2px; 
@@ -23,8 +23,8 @@ text-transform: uppercase;
 transition: all 1.5s;
 overflow: hidden;
 z-index: 1;
-background-color: #e6f7ff; 
-box-shadow: 0px 0px 10px rgba(0,198,255, 0.3); 
+background-color: #8f470d; 
+box-shadow: 0px 0prgb(87, 43, 7)rgba(0,198,255, 0.3); 
 }
 
 .button1:before {
@@ -34,17 +34,19 @@ top: 0;
 left: 0;
 bottom: 0;
 right: 0;
-border-top: 40px solid #d9f2ff; 
-border-bottom: 40px solid #d9f2ff;
+border-top: 40px solid black; 
+border-bottom: 40px solid black;
 border-right: 40px solid transparent;
 transition: all 1.5s;
 transform: translateX(-100%);
 z-index: -1;
+
 }
 
 .button1:hover:before {
 transform: translateX(0%);
 z-index: -1;
+
 }
 
 .button1:after {
@@ -54,22 +56,27 @@ top: 0;
 left: 0;
 bottom: 0;
 right: 0;
-border-top: 40px solid #d9f2ff; 
-border-bottom: 40px solid #d9f2ff; 
+border-top: 40px solid black; 
+border-bottom: 40px solid black; 
 border-left: 40px solid transparent;
 transition: all 1.5s;
 transform: translateX(100%);
 z-index: -1;
+
 }
 
 .button1:hover:after {
 transform: translateX(0%);
 z-index: -1;
+
 }
 
 .button1:hover {
-color: #050505; 
-border-color: #00c6ff; 
-box-shadow: 0px 0px 15px rgba(0,198,255, 0.5); 
+  color: rgb(158, 105, 51);
+  border-color: #946f53;
+  background-color: black;
+  box-shadow: 0px 0px 15px rgba(255, 153, 0, 0.5);
+  text-shadow: 1px 1px 4px #75553f;
+
 }
 </style>

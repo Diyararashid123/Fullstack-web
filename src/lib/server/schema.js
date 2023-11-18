@@ -52,7 +52,7 @@ export const lettersTable = pgTable("letter", {
 
 export const ordersTable = pgTable("order", {
     orderId: varchar("order_id", {
-        length: 20
+        length: 50
     }).primaryKey(),
     letters: varchar("letters", {
         length: 255 

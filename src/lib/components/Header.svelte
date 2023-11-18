@@ -40,5 +40,8 @@
     font-size: 3rem;
     padding-bottom: 4rem;
   }
+  h1{
+    color: #feebdc;
+  }
 
 </style>

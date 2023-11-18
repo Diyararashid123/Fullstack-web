@@ -89,11 +89,12 @@
   h1 {
       margin: 0.5rem 0;
       font-size: 3rem;
-      color: #0a2239;
+      color: #feebdc;
   }
 
   h3 {
       font-size: 1.2rem;
       margin: 0.5rem 0;
+      color: #feebdc;
   }
 </style>
