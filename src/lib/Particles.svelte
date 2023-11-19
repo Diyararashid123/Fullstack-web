@@ -33,7 +33,7 @@
         },
         move: {
           enable: true,
-          speed: 4,
+          speed: 1,
           direction: "bottom",
           random: false,
           straight: false,
@@ -45,16 +45,16 @@
       interactivity: {
         detect_on: "canvas",
         events: {
-          onhover: { enable: true, mode: "bubble" },
-          onclick: { enable: true, mode: "repulse" },
+          onhover: { enable: false, mode: "bubble" },
+          onclick: { enable: false, mode: "repulse" },
           resize: true,
         },
         modes: {
           grab: { distance: 400, line_linked: { opacity: 0.5 } },
-          bubble: { distance: 400, size: 4, duration: 0.3, opacity: 1, speed: 3 },
-          repulse: { distance: 200, duration: 0.4 },
-          push: { particles_nb: 4 },
-          remove: { particles_nb: 2 },
+          bubble: { distance: 400, size: 4, duration: 0.001, opacity: 1, speed: 0.008 },
+          repulse: { distance: 20, duration: 0.001 },
+          push: { particles_nb: 1},
+          remove: { particles_nb: 20 },
         },
       },
       retina_detect: true,

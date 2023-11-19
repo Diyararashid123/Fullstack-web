@@ -8,7 +8,7 @@ export const actions = {
         const username = formData.get('username');
         const password = formData.get('password');
 
-        // Basic check
+    
         if (
             typeof username !== 'string' ||
             username.length < 4 ||

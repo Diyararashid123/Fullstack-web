@@ -1,8 +1,11 @@
 <script>
+  import { goto } from '$app/navigation';
 let showLoginForm = true;
 function toggleForm() {
   showLoginForm = !showLoginForm;
 }
+
+
 
 </script>
 
@@ -44,6 +47,7 @@ function toggleForm() {
     width: 30rem;
     height: 28rem;
     padding: 1rem;
+    margin-top:400px;
   }
   
   @media (min-width: 769px) and (max-width: 1520px) {

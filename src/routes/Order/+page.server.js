@@ -8,14 +8,25 @@ export const load = async()=>{
     }
 }
 export const actions = {
-    default: async ({request}) => {
+    default: async ({request, locals}) => {
         const data = await request.formData();
         const OrderContent = data.get("order-content")?.toString();
         const orderId = uuidv4(); 
-       
+        const session = await locals.auth.validate();
+        if (!session) {
+            return {
+                status: 401, 
+                body: {
+                    message: "You must be logged in to place an order."
+                }
+            };
+        }
+        const username = session.user.username;
         const newOrder = {
             orderId: orderId,
+            userId: session.user.userId,
             letters: OrderContent,
+            username: username,
             orderDate: new Date()
         }
         const insert = await dbClient.insert(ordersTable).values(newOrder)

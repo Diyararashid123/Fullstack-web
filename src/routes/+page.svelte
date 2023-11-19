@@ -1,100 +1,174 @@
 <script>
- import Header from "../lib/components/Header.svelte";
-  import CustomBtn from "../lib/components/CustomBtn.svelte";
-  import { fly } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
+  import Header from "../lib/components/Header.svelte";
+   import CustomBtn from "../lib/components/CustomBtn.svelte";
+   import { fly } from "svelte/transition";
+   import { quintOut } from "svelte/easing";
+   import { onMount } from 'svelte';
+   
+   export let data;
+   onMount(()=>{
+     console.log(data.session);
+   })
+ </script>
+ 
+ <Header/>
+ 
+ <div class="main-container">
+   <div class="hero">
+       <h1 class="hero-header" style="z-index: 99;">Welcome to Robotic Arm</h1>
+     </div>
+   <div class="grid">
+       <div class="grid-content">
+           <h2>Our Story</h2>
+           <hr>
+           <p>At our hotel, we believe in creating memorable experiences for our guests. Nestled in the heart of Glasgow, our hotel is more than just a place to stay; it's a home away from home. Established in 2001, we have been committed to providing unparalleled hospitality and ensuring that every guest leaves with a smile.
+ 
+               From our humble beginnings to becoming a sought-after destination, our hotel has evolved while keeping our core values intact. Our story is one of passion, dedication, and a relentless pursuit of excellence in guest satisfaction.</p>
+       </div>
+       
+       <img src="/robot-1.jpg" alt="bed" class="grid-img">
+       <img src="/robot-2.jpg" alt="Picutre of bench in an outdoor park" class="grid-img">
+       <div class="grid-content">
+           <h2 style="z-index: 99;">Outdoor Escapes</h2>
+           <hr>
+           <p>Indulge in the natural beauty surrounding our hotel. Embark on invigorating hikes along winding trails, suitable for all levels. Inhale the crisp air and absorb panoramic views of the picturesque landscapes. Just a short distance away, a waterfall invites you to explore water sports or simply unwind by the shores. For a quieter escape, revel in the serenity of nearby parks, offering leisurely strolls amidst charming greenery.</p>
+       </div>
+       <div class="grid-content">
+         <h2>Our Rooms</h2>
+         <hr>
+         <p>Indulge in refined comfort at our hotel. Our thoughtfully designed rooms seamlessly combine modern amenities with timeless elegance. From plush bedding to personalized services, each space offers a perfect balance of relaxation and sophistication. Experience hospitality redefined in every detail of our accommodations.</p>
+         <div style="display: grid; place-items: center; width: 100%;"><a class="nav-btn" href="/Order">Place Order</a></div>
+     </div>
+     <img src="/robot-3.jpg" alt="bed" class="grid-img">
+   </div>
+ </div>
+ 
+ <style>
+     
+     * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   z-index: 1;
+ }
+ 
+ .main-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: calc(100vh - 150px); 
+   gap: 1rem;
+   padding: 1rem 0;
+   color: white;
   
-</script>
-
-<Header/>
-
-<div class="main-container">
-  <div class="content">
-      <div class="robot-text"
-          in:fly={{ duration: 2000, y: -300, opacity: 0, easing: quintOut }}>
-          <h1>Information part</h1>
-          <h3>Robotic arms, marvels of modern engineering, have revolutionized industries ranging from manufacturing to medicine. These sophisticated machines mimic the dexterity of the human arm, programmed to perform intricate tasks with precision. Through advancements in technology, robotic arms offer enhanced efficiency and consistency. On this platform, users can seamlessly order specific robotic systems using an intuitive letter-based system.
-          </h3>
-      </div>
-
-      <img src="/page1.PNG" alt="Profile" class="profile-pic"
-    in:fly={{ delay: 500, duration: 2000, y: 300, opacity: 0, easing: quintOut }} />
-
-  </div>
-
-  <div class="button-container"
-      in:fly={{ delay: 800, duration: 2000, y: 500, opacity: 0, easing: quintOut }}>
-      <CustomBtn content="Go to Order" url={"/Order"}/>
-  </div>
-</div>
-
-<style>
+ }
+   
+   *{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+   
+   }
+ 
+   :root{
+     --text: #e8ebed;
+     --background: #161a1d;
+     --primary: #636583;
+     --secondary: #14110f;
+     --accent: #898667;
     
-    * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.main-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 150px); 
-  gap: 1rem;
-  padding: 1rem 0;
-}
-
-.content {
-  display: flex;
-  justify-content: center; 
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  max-width: 65rem; 
-  padding-bottom:5rem;
-}
-
-  .button-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-  }
+   }
+ 
+   .hero{
+     position: relative;
+     display: grid;
+     place-items: center;
+     height: 30rem;
+     font-style:italic;
+    
+   }
+ 
+   .hero::before{
+     content: "";
+     position: absolute;
+     top: 0px;
+     right: 0px;
+     bottom: 0px;
+     left: 0px;
+     background-size: cover;
+     background-position: center;
+     filter: blur(3px);
+    
   
-  @media (min-width: 760px) and (max-width: 1500px) {
-      .profile-pic {
-          flex: 1;
-          border-radius: 2rem;
-          max-width: 30%;  
-          height: auto;    
-      }
+   }
+ 
+   .hero::before{
+     background-image: url("/page1.PNG");
+     filter: brightness(50%) contrast(110%);
+    
+   }
+ 
+   .grid{
+     display: grid;
+     justify-content: center;
+     grid-template-columns: repeat(2, 1fr);
+     gap: 1rem;
+     row-gap: 5rem;
+     width: 80%;
+     justify-self: center;
+     letter-spacing: 2px;
+     
+   }
+ 
+   .grid-content{
+     max-width: 70%;
+     justify-self: center;
+    
+   }
+   .grid-content > p{
+     line-height: 1.6;
+   }
+   .grid-content > h2{
+     text-align: center;
+     margin-bottom: 1rem;
+   }
+   .grid-img{
+     width: 100%;
+     align-self: center;
+    
+   }
+ 
+   .main-container{
+     position: relative;
+     display: grid;
+     gap: 1rem;
+     padding: 1rem 6rem;
+   }
+ 
+  
 
-      .robot-text {
-          flex: 1;
-          font-size: 1rem;
-          max-width: 50%;
-          color: #0a2239;
-          padding: 0 1rem;
-      }
-
-      .button-container {
-          position: relative;
-          width: 80%;
-          top:-1.5rem;
-      }
-  }
-
-  h1 {
-      margin: 0.5rem 0;
-      font-size: 3rem;
-      color: #feebdc;
-  }
-
-  h3 {
-      font-size: 1.2rem;
-      margin: 0.5rem 0;
-      color: #feebdc;
-  }
-</style>
+   .nav-btn{
+     padding: 0.8rem;
+     border-radius: 16px;
+     background-color: var(--accent);
+     color: black;
+     width: fit-content;
+     letter-spacing: 0.6px;
+     margin-top: 1rem;
+     z-index: 1;
+   }
+ 
+   hr{
+     width: 30%;
+     opacity: 0.5;
+     margin: 0.75rem 0;
+     z-index: 1;
+   }
+ 
+   .hero-header{
+     font-size: clamp(1rem, 2vw, 4rem);
+     z-index: 1;
+   }
+ </style>
+ 

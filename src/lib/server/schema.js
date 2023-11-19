@@ -54,6 +54,14 @@ export const ordersTable = pgTable("order", {
     orderId: varchar("order_id", {
         length: 50
     }).primaryKey(),
+    userId: varchar("user_id", {
+        length: 15
+    })
+    .notNull()
+    .references(() => usersTable.id),
+    username: varchar("username", {
+        length: 50 
+    }).notNull(),
     letters: varchar("letters", {
         length: 255 
     }).notNull(),
