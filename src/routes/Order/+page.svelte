@@ -50,7 +50,7 @@
             {/each}
         </div>
     </fieldset>
-    <form class='Order' use:enhance method="POST" on:submit|preventDefault={handleSubmit}>
+    <form class='order' use:enhance method="POST" on:submit|preventDefault={handleSubmit}>
         <input name="order-content" type="text" placeholder="Submit here" bind:value={inputFieldValue}>
         <button type="submit">Submit Order</button>
     </form>
