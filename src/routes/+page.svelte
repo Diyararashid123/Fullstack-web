@@ -37,7 +37,7 @@
          <hr>
          <p>Our goal is to continually advance this project, pushing the boundaries of robotic technology. We're committed to refining our design, enhancing functionality, and ensuring that our robotic arm remains at the forefront of the industry. By embracing innovation and valuing feedback, we strive to make our robotic arm an indispensable tool in various sectors. Join us in this exciting journey of technological evolution.</p>
          <div class= "btn"  style="display grid; place-items: center; width: 65%;">
-          <a  href="/order">Place Order</a></div>
+          <a  href="/Order">Place Order</a></div>
      </div>
      <img src="/robot-3.jpg" alt="bed" class="grid-img">
    </div>
