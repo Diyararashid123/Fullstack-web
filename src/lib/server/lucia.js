@@ -4,11 +4,12 @@ import { sveltekit } from "lucia/middleware";
 import { dev } from "$app/environment";
 import { pg } from "@lucia-auth/adapter-postgresql";
 import postgres from 'pg';
-import { DATABASE_URL } from "$env/static/private";
+const DATABASE_URL = process.env.DATABASE_URL;
 
 const pool = new postgres.Pool({
     connectionString: DATABASE_URL
 });
+
 
 export const auth = lucia({
     adapter: pg(pool, {
