@@ -11,7 +11,7 @@
    })
  </script>
  
- <Header/>
+ <Header user = {data.session.user}/>
  
  <div class="main-container">
    <div class="hero">
@@ -19,25 +19,25 @@
      </div>
    <div class="grid">
        <div class="grid-content">
-           <h2>Our Story</h2>
+           <h2>Innovative Engineering</h2>
            <hr>
-           <p>At our hotel, we believe in creating memorable experiences for our guests. Nestled in the heart of Glasgow, our hotel is more than just a place to stay; it's a home away from home. Established in 2001, we have been committed to providing unparalleled hospitality and ensuring that every guest leaves with a smile.
- 
-               From our humble beginnings to becoming a sought-after destination, our hotel has evolved while keeping our core values intact. Our story is one of passion, dedication, and a relentless pursuit of excellence in guest satisfaction.</p>
+           <p>Our journey began with a team of five passionate engineers, each bringing unique expertise to the table. Together, we embarked on an ambitious project to create a state-of-the-art robotic arm. Our creation isn't just a marvel of technology; it's a testament to human ingenuity and collaboration. Through rigorous design, testing, and refinement, we've developed a robot that's not only highly efficient but also user-friendly, offering an interactive experience unlike any other.</p>
+
        </div>
        
        <img src="/robot-1.jpg" alt="bed" class="grid-img">
        <img src="/robot-2.jpg" alt="Picutre of bench in an outdoor park" class="grid-img">
        <div class="grid-content">
-           <h2 style="z-index: 99;">Outdoor Escapes</h2>
+           <h2 style="z-index: 99;">Advanced Systems</h2>
            <hr>
-           <p>Indulge in the natural beauty surrounding our hotel. Embark on invigorating hikes along winding trails, suitable for all levels. Inhale the crisp air and absorb panoramic views of the picturesque landscapes. Just a short distance away, a waterfall invites you to explore water sports or simply unwind by the shores. For a quieter escape, revel in the serenity of nearby parks, offering leisurely strolls amidst charming greenery.</p>
+           <p>At the core of our robotic arm is an advanced system, designed to handle complex tasks with precision and ease. Equipped with cutting-edge sensors and AI-driven algorithms, the robot can perform a wide range of actions, from intricate assembly tasks to interacting with users in real-time. Its versatility makes it ideal for various applications, from industrial settings to educational demonstrations.</p>
        </div>
        <div class="grid-content">
-         <h2>Our Rooms</h2>
+        <h2>Project Development</h2>
          <hr>
-         <p>Indulge in refined comfort at our hotel. Our thoughtfully designed rooms seamlessly combine modern amenities with timeless elegance. From plush bedding to personalized services, each space offers a perfect balance of relaxation and sophistication. Experience hospitality redefined in every detail of our accommodations.</p>
-         <div style="display: grid; place-items: center; width: 100%;"><a class="nav-btn" href="/Order">Place Order</a></div>
+         <p>Our goal is to continually advance this project, pushing the boundaries of robotic technology. We're committed to refining our design, enhancing functionality, and ensuring that our robotic arm remains at the forefront of the industry. By embracing innovation and valuing feedback, we strive to make our robotic arm an indispensable tool in various sectors. Join us in this exciting journey of technological evolution.</p>
+         <div class= "btn"  style="display grid; place-items: center; width: 65%;">
+          <a  href="/order">Place Order</a></div>
      </div>
      <img src="/robot-3.jpg" alt="bed" class="grid-img">
    </div>
@@ -148,16 +148,119 @@
  
   
 
-   .nav-btn{
-     padding: 0.8rem;
-     border-radius: 16px;
-     background-color: var(--accent);
-     color: black;
-     width: fit-content;
-     letter-spacing: 0.6px;
-     margin-top: 1rem;
-     z-index: 1;
-   }
+   .btn {
+  position: relative;
+  width: 170px;
+  height: 50px;
+ padding: 0.5rem;
+ text-wrap: wrap;
+ text-align: center;
+ margin-top: 1rem;
+}
+
+.btn a{
+display: flex;
+justify-content: center;
+align-items: center;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(255, 255, 255, 0.051);
+box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+border-top: 1px solid rgba(250, 52, 52, 0.1);
+border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+z-index:10;
+color: #fff;
+border-radius: 30px;
+font-weight: 400;
+letter-spacing: 1px;
+text-decoration: none;
+transition: 0.5s;
+overflow: hidden;
+backdrop-filter: blur(15px);
+
+}
+
+.btn a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background:linear-gradient(to left, rgba(255,255,255,0.149), transparent);
+  transform: skewX(45deg);
+  transition: 0.5s;
+  transition-delay: 0.5s;
+}
+
+.btn:hover a {
+  letter-spacing: 3px;
+}
+
+a:hover::before{
+  transform: skewX(45deg) translateX(200%);
+  transition-delay: 0.5s;
+}
+
+.btn::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #50C878;
+  bottom: -5px;
+  width: 30px;
+  height: 10px;
+  border-radius: 10px;
+  transition: 0.5s;
+  transition-delay: 0s;
+}
+
+
+.btn:hover::before{
+  bottom: 0px;
+  height: 50%;
+  width: 80%;
+  border-radius: 30px;
+  transition-delay: 0.5s;
+}
+
+
+.btn::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #50C878;
+  top: -5px;
+  width: 30px;
+  height: 10px;
+  border-radius: 10px;
+  transition: 0.5s;
+  transition-delay: 0s;
+}
+
+.btn:hover::after{
+  top: 0px;
+  height: 50%;
+  width: 80%;
+  border-radius: 30px;
+  transition-delay: 0.5s;
+}
+
+
+
+.btn::before,
+.btn::after,
+.btn:nth-child(1)::before,
+.btn:nth-child(1)::after{
+  background: #1031c4;
+  box-shadow: none;
+}
+
  
    hr{
      width: 30%;

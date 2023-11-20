@@ -5,10 +5,8 @@ function toggleForm() {
   showLoginForm = !showLoginForm;
 }
 
-
-
 </script>
-
+<div class="center-container">
 <div class="wrapper">
   <div class="form-wrapper sign-in">
     <form method="post">
@@ -28,7 +26,7 @@ function toggleForm() {
     </form>
   </div>
 </div>
-
+</div>
 <style>
   * {
     margin: 0;
@@ -36,18 +34,24 @@ function toggleForm() {
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
   }
+
+  .center-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+  }
   
   .wrapper {
     display: flex;
-    position: relative;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     max-width: 27rem;
     margin-left: 36%;
     margin: 0 auto;
     width: 30rem;
     height: 28rem;
-    padding: 1rem;
-    margin-top:400px;
   }
   
   @media (min-width: 769px) and (max-width: 1520px) {
@@ -98,15 +102,12 @@ function toggleForm() {
   }
   
   .form-wrapper {
-    position: absolute;
-    top: 0;
-    left: 30;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background: #fff;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: #fff;
   }
   
   h2 {

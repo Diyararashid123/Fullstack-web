@@ -1,6 +1,7 @@
 <script>
   export let content;
   export let url;
+  
 </script>
 <div class="btn">
 <a href={url}>{content}</a>

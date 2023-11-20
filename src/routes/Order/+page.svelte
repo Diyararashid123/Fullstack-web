@@ -1,66 +1,66 @@
 <script>
   export let data; 
   import {enhance} from "$app/forms"
-  import NavBtn from "../../lib/components/NavBtn.svelte";
+  import Header from '../../lib/components/Header.svelte';
+  let thankYouClass = '';
   let inputFieldValue = '';
   let selectedLetters = []; 
   
   function selectLetter(letter) {
     if (selectedLetters.length < 4) {
-      selectedLetters = [...selectedLetters, letter];
+      let formattedLetter = `${letter.charachter} quantity ${letter.quantity}`;
+    selectedLetters = [...selectedLetters, formattedLetter];
     } else {
       console.log("You can't select more than 4 letters!");
     }
   }
+  let isSubmitted = false;
 
-  function handleKeyPress(event, index) {
-   
-    if (event.key === 'Enter') {
-      deleteLetter(index);
-    }
+  function handleSubmit() {
+    isSubmitted = true;
+    thankYouClass = 'thank-you-message-active'; 
   }
-
-  function deleteLetter(index) {
-    selectedLetters = selectedLetters.filter((_, i) => i !== index);
-    updateInputField();
-  }
-
   function updateInputField() {
   inputFieldValue = selectedLetters.join(''); 
 }
 </script>
+<Header/>
 <section class="order-form">
+  <h1>Order System</h1>
+  <div class="order-instructions">
+    <p>Follow these simple steps to place your order:</p>
+    <ol>
+      <li>You can see in the "SELECT ITEMS" table the letters that are available to order.</li>
+      <li> on the letters you wish to include in your order (maximum of 4).</li>
+      <li>Review your selected letters in the 'Order here' input field.</li>
+      <li>Once you're happy with your selection, click 'Submit Order' to complete your purchase.</li>
+    </ol>
+  </div>
     <fieldset>
         <legend>Select Items:</legend>
         <div class="alphabet-selection">
             {#each data.letters as letter}
-                <button class="btn" type="button" on:click={() => selectLetter(letter.charachter)}>
-                    <a href={letter.url}>{letter.charachter}</a>
-                </button>
+            <div class="letter-container">
+              <button class="btn" type="button" on:click={() => selectLetter(letter.charachter)}>
+                  <a href={letter.url}>{letter.charachter}</a>
+              </button>
+              <p class="quantity">{letter.quantity}</p>
+          </div>
+          
             {/each}
         </div>
     </fieldset>
-
-    <div class="selected-items">
-        {#each selectedLetters as item, index}
-            <span 
-                tabindex="0"  
-                role="button" 
-                on:click={() => deleteLetter(index)}
-                on:keypress={(event) => handleKeyPress(event, index)}
-            >
-                {item}
-            </span>
-        {/each}
-    </div>
-
-    <form class='Order' use:enhance method="POST">
-        <input name="order-content" type="text" placeholder="PLS WORK" bind:value={inputFieldValue}>
+    <form class='Order' use:enhance method="POST" on:submit|preventDefault={handleSubmit}>
+        <input name="order-content" type="text" placeholder="Submit here" bind:value={inputFieldValue}>
         <button type="submit">Submit Order</button>
     </form>
+    {#if isSubmitted}
+ <div class={`thank-you-message ${thankYouClass}`}>
+    Thank you for your order!
+  </div>
+{/if}
+
 </section>
-
-
 
 <style>
 .alphabet-selection {
@@ -70,41 +70,93 @@
     border-top: 1px solid rgba(250, 52, 52, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
+    grid-template-columns: repeat(2,  1fr);
+    gap: 1rem;
     border-radius: 1rem;
+    padding:1rem;
+}
+
+.order-form {
+  max-width:50rem;
+  margin: auto;
+  padding: 200px 20px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #003c80;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.thank-you-message {
+  display: none; 
+  margin-top: 20px;
+  text-align: center;
+  color: #4CAF50;
+  font-size: 1.5em;
+  animation: slideFadeIn 1s ease-out forwards;
+}
+
+
+.thank-you-message-active {
+  display: block;
 }
 
   .alphabet-selection button {
     position: relative;
-    background-color: rgba(128, 0, 128, 0.1); /* Lighter purple background */
-    color: #fff; /* White text for contrast */
+    background-color: rgba(27, 51, 187, 0.1);
+    color: #fff; 
+    left: 4rem;
     box-shadow: 0px 0px 10px rgba(128, 0, 128, 0.3);
    border-top: 1px solid rgba(250, 52, 52, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  z-index:10;
-  overflow: hidden;
+   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+   z-index:10;
+   overflow: hidden;
     text-transform: uppercase;
     box-shadow: 0px 0px 10px rgba(0, 198, 255, 0.3);
-    width: 7rem;
-    height: 2rem;
+    width: 8.4rem;
+    height: 2.4rem;
     line-height: 20px;
     text-align: center;
-    font-size: 1rem;
-    padding: 5px 10px;
+    font-size: 1.2rem;
+    padding: 6px 12px;
     border-radius: 0.1rem;
     cursor: pointer;
   }
   
-  .Order{
-    
-  }
+  .letter-container {
+  display: grid;
+  grid-template-columns: auto auto; 
+  align-items: center;
+  gap: 10px; 
+  margin-bottom: 10px; 
+}
+
+
+.quantity{
+  text-align:right;
+  color:#fff;
+  margin-right: 6rem;
+}
+  
   legend {
     border-radius: 1rem;
     text-align: center;
     color: rgb(7, 7, 7);
     font-family: "Courier New";
-    font-size: 30px;
+    font-size: 36px;
     letter-spacing: 0.2rem;
     text-transform: uppercase;
     transition: all 0.5s;
@@ -118,50 +170,103 @@
     padding-bottom: 1rem;
   }
 
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
 
   form button {
     align-self: center;
   }
 
 
-
-  @media (min-width: 769px) and (max-width: 1500px) {
-  
-  }
-  .btn {
-  position: relative;
-  width: 155px;
-  height: 50px;
- margin: 20px;
+  input[name="order-content"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  color:white;
+  background-color: rgba(255, 255, 255, 0.051);
+ box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+ border-top: 1px solid rgba(250, 52, 52, 0.1);
+ border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.btn a{
-display: flex;
-justify-content: center;
-align-items: center;
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(255, 255, 255, 0.051);
-box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-border-top: 1px solid rgba(250, 52, 52, 0.1);
-border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-z-index:10;
-color: #fff;
-border-radius: 30px;
-font-weight: 400;
-letter-spacing: 1px;
-text-decoration: none;
-transition: 0.5s;
-overflow: hidden;
-backdrop-filter: blur(15px);
+
+button[type="submit"] {
+  background-color: rgba(128, 0, 128, 0.1); /* Similar background */
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 0.1rem;
+  cursor: pointer;
+  position: relative; /* Important for pseudo-elements */
+  overflow: hidden; /* To contain the hover effects */
+  text-transform: uppercase;
+  box-shadow: 0px 0px 10px rgba(0, 198, 255, 0.3);
+  transition: 0.5s;
+  font-size: 1.2rem;
+  line-height: 20px;
+  width: 13rem;
+  height: 2.6rem;
+}
+
+button[type="submit"]:hover {
+  letter-spacing: 3px;
+}
+.order-instructions {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.051);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  line-height: 1.8;
+}
+
+.order-instructions p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px; 
+}
+
+.order-instructions ol {
+  margin-top: 10px;
+  font-size: 1rem;
+  padding-left: 20px; 
+}
+
+.order-instructions li {
+  margin-bottom: 10px;
+}
+
+.btn a {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(250, 52, 52, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1;
+  color: #fff;
+  border-radius: 30px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: 0.5s;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
 }
 
 .btn a::before {
@@ -184,6 +289,11 @@ backdrop-filter: blur(15px);
 a:hover::before{
   transform: skewX(45deg) translateX(200%);
   transition-delay: 0.5s;
+}
+h1{
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
 .btn::before{
@@ -213,7 +323,7 @@ a:hover::before{
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  background: #50C878;
+  background: #003c80;
   top: -5px;
   width: 30px;
   height: 10px;
@@ -239,9 +349,6 @@ a:hover::before{
   background: #003c80;
   box-shadow: none;
 }
-
-
-
 
 
 </style>
