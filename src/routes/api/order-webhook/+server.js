@@ -1,16 +1,23 @@
+// Import Supabase client
+import { createClient } from '@supabase/supabase-js';
 
-// GET request handler
-// Import the database client and schema
-import { dbClient } from "$lib/server/db";
-import { ordersTable } from "$lib/server/schema";
+// Initialize Supabase client
+const supabaseUrl = 'https://wolrwotpqfgrxtgpjljx.supabase.co'; // Replace with your Supabase URL
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndvbHJ3b3RwcWZncnh0Z3BqbGp4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5OTY0NDM0MywiZXhwIjoyMDE1MjIwMzQzfQ.K3tvwnlJGoQzJ4vXoNNH2IdJ3VTVayFQtFNN5Pcr4I0; // Replace with your Supabase Anon Key'
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // GET request handler
 export async function GET() {
     try {
-        // Fetch all orders from the database
-        console.log("Attempting to query the database");
-        const orders = await dbClient.select('orderId').from(ordersTable).limit(10);
-        console.log("Query executed", orders);
+        // Fetch all orders from the Supabase 'order' table
+        let { data: orders, error } = await supabase
+            .from('order')
+            .select('*');
+
+        if (error) {
+            throw error;
+        }
+
         return new Response(JSON.stringify(orders), {
             headers: { 'Content-Type': 'application/json' },
             status: 200
@@ -23,14 +30,3 @@ export async function GET() {
         });
     }
 }
-
-async function testDb() {
-    try {
-        const result = await dbClient.select('*').from(ordersTable);
-        console.log(result);
-    } catch (error) {
-        console.error("Error testing DB", error);
-    }
-}
-
-testDb();
