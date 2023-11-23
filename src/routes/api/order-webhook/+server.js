@@ -1,29 +1,15 @@
-// +server.js
-
-// Import necessary libraries and initialize database client
-import { createClient } from '@supabase/supabase-js'
-
-// Initialize Supabase client
-const supabaseUrl = 'https://wolrwotpqfgrxtgpjljx.supabase.co'; // Replace with your Supabase URL
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndvbHJ3b3RwcWZncnh0Z3BqbGp4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5OTY0NDM0MywiZXhwIjoyMDE1MjIwMzQzfQ.K3tvwnlJGoQzJ4vXoNNH2IdJ3VTVayFQtFNN5Pcr4I0'; // Replace with your Supabase Anon Key
-const dbClient = createClient(supabaseUrl, supabaseKey);
-
-// Define your orders table name
-const ordersTable = 'orders'; // Replace with your actual orders table name
+// Import Drizzle ORM and your database client
+import { dbClient } from '$lib/server/db.js';
+import { ordersTable } from '$lib/server/schema.js';
 
 // GET request handler
 export async function GET() {
     try {
-        // Fetch all orders from the database
-        const { data, error } = await dbClient
-            .from(ordersTable)
-            .select('*');
+        // Fetch all orders from the database using Drizzle ORM
+        const orders = await ordersTable.select(dbClient)
+            .get();
 
-        if (error) {
-            throw error;
-        }
-
-        return new Response(JSON.stringify(data), {
+        return new Response(JSON.stringify(orders), {
             headers: { 'Content-Type': 'application/json' },
             status: 200
         });
@@ -42,12 +28,11 @@ export async function POST(request) {
         // Parse the incoming webhook data
         const webhookData = await request.json();
 
-        // For demonstration, let's log the webhook data
-        console.log('Webhook data received:', webhookData);
+        // Process the webhook data (e.g., log it, update the database, etc.)
+        console.log('Webhook Data:', webhookData);
 
-        // Here, you can process the webhook data as required
+        // Here, you can add additional logic to handle the webhook data
 
-        // Return a success response
         return new Response(null, { status: 200 });
     } catch (err) {
         // Handle any errors that occur
