@@ -5,29 +5,22 @@ import { dbClient } from '$lib/dbClient'; // Adjust this path as per your setup
 
 export async function GET({ params }) {
     const { orderId } = params;
-
-    try {
-        // Fetch the order from the database
+    console.log("i was here");
         const { data: order, error } = await dbClient
             .from('orders')
             .select('*')
             .eq('id', orderId)
             .single();
-
-        if (error) throw error;
+                console.log(data);
 
         // Return the order data and its processed status
         return new Response(JSON.stringify({
             order: order,
-            processed: order ? order.processed : false
+            processed: order ? order.processed : false,
+            message: "ITS RETURNED"
         }), {
             headers: { 'Content-Type': 'application/json' },
             status: 200
         });
-    } catch (error) {
-        return new Response(JSON.stringify({ error: error.message }), {
-            headers: { 'Content-Type': 'application/json' },
-            status: 500
-        });
-    }
-}
+    } 
+
