@@ -4,25 +4,24 @@ export async function POST(request) {
     try {
         const eventData = await request.json();
 
-        // Check if 'processed' field exists and is true
-        if (eventData.record && eventData.record.processed === true) {
-            // Logic for when the order's 'processed' field is true
+        // Assuming 'eventData.record' contains the order data,
+        // and 'eventData.record.processed' is the field we're interested in.
+        const isProcessed = eventData.record?.processed;
+
+        if (isProcessed === true) {
             console.log("Order processed:", eventData.record);
-
-            // Here you can add any specific actions for a processed order
-            // ...
-
+            // Add logic for processed order here (e.g., update application state, notify users)
             return new Response(JSON.stringify({
                 status: 'success',
                 message: 'Order processed',
-                data: eventData.record  // Return the processed order data
+                data: eventData.record  // Returning the processed order data
             }), {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
         } else {
-            // Handle the case where 'processed' is not true or the field is missing
+            console.log("Order not processed:", eventData.record);
             return new Response(JSON.stringify({
                 status: 'success',
                 message: 'Order not processed or processed field missing'
@@ -33,9 +32,7 @@ export async function POST(request) {
             });
         }
     } catch (error) {
-        // Handle any errors that occur during processing
         console.error("Error processing webhook:", error);
-
         return new Response(JSON.stringify({
             status: 'error',
             message: 'Error processing webhook data'
