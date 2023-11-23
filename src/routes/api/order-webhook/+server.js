@@ -5,18 +5,27 @@ import { SUPABASE_URL,SUPABASE_KEY } from "$env/static/private";
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // GET request handler
-export async function GET() {
+// GET request handler
+export async function GET({ query }) {
     try {
-        // Fetch all orders from the Supabase 'order' table
+        // Extract the user ID from the query parameter
+        const userId = query.get('userId');
+
+        // Check if there are any processed orders for the specific user
         let { data: orders, error } = await supabase
             .from('order')
-            .select('*');
+            .select('processed')
+            .eq('userId', userId)
+            .eq('processed', true);
 
         if (error) {
             throw error;
         }
 
-        return new Response(JSON.stringify(orders), {
+        // Determine if any orders are processed
+        const isOrderProcessed = orders.length > 0;
+
+        return new Response(JSON.stringify({ isOrderProcessed }), {
             headers: { 'Content-Type': 'application/json' },
             status: 200
         });
