@@ -3,7 +3,7 @@
   import {enhance} from "$app/forms";
   import Header from '../../lib/components/Header.svelte';
   import { onMount, tick } from 'svelte';
-  import { user } from '$lib/stores'; // Assuming you have a user store
+
 
   export let data;
   let thankYouClass = '';
@@ -13,7 +13,7 @@
   let orderStatusMessage = "Submitting your order...";
 
   async function fetchOrderStatus() {
-    const userId = $user.id; // Assuming you get the user ID from a store
+    const userId = userId.id; // Assuming you get the user ID from a store
     const response = await fetch(`/api/order-webhook?userId=${userId}`);
     const { isOrderProcessed } = await response.json();
 
