@@ -1,24 +1,27 @@
 // src/routes/api/order/[orderId].js
-import { dbClient } from '$lib/server/db.js'; // Adjust the path as necessary
+import { dbClient } from '$lib/server/db.js';
 import { ordersTable } from '$lib/server/schema.js';
 
 export async function GET({ params }) {
     const { orderId } = params;
 
     try {
-        // Fetch the order from the database
-        const order = await dbClient
-            .select(ordersTable.processed)
-            .from(ordersTable)
+        // Construct the query
+        const query = dbClient
+            .select.from(ordersTable)
             .where(ordersTable.orderId.eq(orderId))
-            .execute()
-            .then((result) => result[0]);
+            .limit(1);
+
+        // Execute the query
+        const result = await query.execute();
+
+        // Assuming the first row in the result is our order
+        const order = result[0];
 
         if (!order) {
             throw new Error('Order not found');
         }
 
-        // Return the processed status of the order
         return new Response(JSON.stringify({
             orderId: orderId,
             processed: order.processed
