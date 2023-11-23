@@ -4,20 +4,14 @@ export async function GET({ params }) {
     const { orderId } = params;
     console.log("Received request for order ID:", orderId);
 
-    // Mock order data for testing
-    const mockOrder = {
-        id: orderId,
-        // Add other mock fields as necessary
-    };
+    // Mock processed status for testing
+    // Set this to true or false as per your test scenario
+    const isProcessed = false;
 
-    // Mock processed status
-    const isProcessed = false; // Set this to true or false for testing
-
-    // Return the mock order data and its processed status
+    // Return only the processed status
     return new Response(JSON.stringify({
-        order: mockOrder,
-        processed: isProcessed,
-        message: "Mock order data returned"
+        orderId: orderId,
+        processed: isProcessed
     }), {
         headers: { 'Content-Type': 'application/json' },
         status: 200
