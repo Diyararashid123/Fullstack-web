@@ -1,10 +1,8 @@
 // Import Supabase client
 import { createClient } from '@supabase/supabase-js';
-
+import { SUPABASE_URL,SUPABASE_KEY } from "$env/static/private";
 // Initialize Supabase client
-const supabaseUrl = 'https://wolrwotpqfgrxtgpjljx.supabase.co'; // Replace with your Supabase URL
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndvbHJ3b3RwcWZncnh0Z3BqbGp4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5OTY0NDM0MywiZXhwIjoyMDE1MjIwMzQzfQ.K3tvwnlJGoQzJ4vXoNNH2IdJ3VTVayFQtFNN5Pcr4I0';
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // GET request handler
 export async function GET() {
@@ -24,6 +22,28 @@ export async function GET() {
         });
     } catch (err) {
         // Handle any errors that occur during the fetch
+        return new Response(JSON.stringify({ error: err.message }), {
+            headers: { 'Content-Type': 'application/json' },
+            status: 500
+        });
+    }
+}
+
+// POST request handler
+export async function POST(request) {
+    try {
+        // Parse the incoming webhook data
+        const webhookData = await request.json();
+
+        // Process the webhook data
+        console.log('Webhook Data:', webhookData);
+
+        // Here, you can add logic based on the webhook data received
+        // For example, update the status of an order, trigger other processes, etc.
+
+        return new Response(null, { status: 200 });
+    } catch (err) {
+        // Handle any errors that occur
         return new Response(JSON.stringify({ error: err.message }), {
             headers: { 'Content-Type': 'application/json' },
             status: 500
