@@ -6,17 +6,14 @@ export async function GET({ params }) {
     const { orderId } = params;
 
     try {
-        // Construct the query
-        const query = dbClient
-            .select.from(ordersTable)
+        // Fetch the order from the database
+        const orders = await dbClient
+            .select()
+            .from(ordersTable)
             .where(ordersTable.orderId.eq(orderId))
-            .limit(1);
+            .execute();
 
-        // Execute the query
-        const result = await query.execute();
-
-        // Assuming the first row in the result is our order
-        const order = result[0];
+        const order = orders[0]; // Assuming the first result is the order we want
 
         if (!order) {
             throw new Error('Order not found');
