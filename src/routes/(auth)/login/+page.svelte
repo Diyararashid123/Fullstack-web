@@ -1,5 +1,5 @@
 <script>
-  import { goto } from '$app/navigation';
+
 let showLoginForm = true;
 function toggleForm() {
   showLoginForm = !showLoginForm;
