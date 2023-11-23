@@ -1,61 +1,37 @@
-
 <script>
-  import {enhance} from "$app/forms";
+  export let data; 
+  import {enhance} from "$app/forms"
   import Header from '../../lib/components/Header.svelte';
-  import { onMount, tick } from 'svelte';
-
-
-  export let data;
   let thankYouClass = '';
   let inputFieldValue = '';
-  let selectedLetters = [];
+  let selectedLetters = []; 
   let isSubmitted = false;
-  let orderStatusMessage = "Submitting your order...";
-
-  async function fetchOrderStatus() {
-    const userId = userId.id; // Assuming you get the user ID from a store
-    const response = await fetch(`/api/order-webhook?userId=${userId}`);
-    const { isOrderProcessed } = await response.json();
-
-    orderStatusMessage = isOrderProcessed
+ 
+  let orderStatusMessage = isOrderProcessed
       ? "Your order is done!"
-      : "Your order is being handled.";
-  }
-
-  function selectLetter(letter) {
-    // Existing letter selection logic...
-  }
-
+      : "Your order is being processed...";
   async function handleSubmit() {
     isSubmitted = true;
-    thankYouClass = 'thank-you-message-active';
+    orderStatusMessage = "Please wait, processing your order...";
+    thankYouClass = 'thank-you-message-active'; 
+
     
-    // Call your API to submit the order...
-    // After submitting, start checking the order status
-    await tick(); // Ensure UI updates
-    orderStatusMessage = "Your order is being processed...";
-    checkOrderStatusPeriodically();
+  }
+  function selectLetter(letter) {
+    if (selectedLetters.length < 4) {
+      let formattedLetter = `${letter.charachter} quantity ${letter.quantity}`;
+    selectedLetters = [...selectedLetters, formattedLetter];
+    } else {
+      console.log("You can't select more than 4 letters!");
+    }
   }
 
   function updateInputField() {
-    inputFieldValue = selectedLetters.join(''); 
-  }
+  inputFieldValue = selectedLetters.join(''); 
+}
 
-  function checkOrderStatusPeriodically() {
-    const interval = setInterval(async () => {
-      await fetchOrderStatus();
-      clearInterval(interval); // Stop checking once the order is processed
-    }, 5000); // Check every 5 seconds
-  }
 
-  onMount(() => {
-    if (isSubmitted) {
-      checkOrderStatusPeriodically();
-    }
-  });
 </script>
-
-
 <Header/>
 <section class="order-form">
   <h1>Order System</h1>
@@ -86,14 +62,18 @@
         <input name="order-content" type="text" placeholder="Submit here" bind:value={inputFieldValue}>
         <button type="submit">Submit Order</button>
     </form>
-    {#if isSubmitted}
-    <div class={`thank-you-message ${thankYouClass}`}>
-      {orderStatusMessage}
-    </div>
-  {/if}
+   {#if isSubmitted}
+  <div class={`thank-you-message ${thankYouClass}`}>
+    {orderStatusMessage}
+  </div>
+{:else}
+  <form class='order' on:submit|preventDefault={handleSubmit}>
+    
+    <button type="submit">Submit Order</button>
+  </form>
+{/if}
+
 </section>
-
-
 
 <style>
 .alphabet-selection {

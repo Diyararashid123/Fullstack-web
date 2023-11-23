@@ -1,18 +1,38 @@
 import { dbClient } from "$lib/server/db"
 import { ordersTable, lettersTable } from "$lib/server/schema"
 import { v4 as uuidv4 } from 'uuid';
-export const load = async()=>{
-    const letters = await dbClient.select().from(lettersTable)
-    return{
-        letters
-    }
-}
 
-async function fetchData() {
-    const response = await fetch('/api/your-endpoint');
-    const data = await response.json();
+
+export const load = async({ locals }) => {
+    const letters = await dbClient.select().from(lettersTable);
+
+    // Check if the user is logged in
+    const session = await locals.auth.validate();
+    if (!session) {
+        return {
+            status: 401,
+            letters,
+            isOrderProcessed: false
+        };
+    }
     
-  }
+    const orders = await dbClient
+        .select('processed')
+        .from(ordersTable)
+        .where('userId', session.user.userId)
+        .and('processed', true)
+        .orderBy('orderDate', 'desc')
+        .limit(1);
+
+    const isOrderProcessed = orders.length > 0 && orders[0].processed;
+
+    return {
+        letters,
+        isOrderProcessed
+    };
+};
+
+
 export const actions = {
     default: async ({request, locals}) => {
         const data = await request.formData();
