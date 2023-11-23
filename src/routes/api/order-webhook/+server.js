@@ -1,57 +1,33 @@
-// src/routes/api/order-webhook/+server.js
+// src/routes/api/order/[orderId].js
 
-export async function POST(request) {
+// Import your existing database client setup here
+import { dbClient } from '$lib/dbClient'; // Adjust this path as per your setup
+
+export async function GET({ params }) {
+    const { orderId } = params;
+
     try {
-        const eventData = await request.json();
+        // Fetch the order from the database
+        const { data: order, error } = await dbClient
+            .from('orders')
+            .select('*')
+            .eq('id', orderId)
+            .single();
 
-        // Assuming 'eventData.record' contains the order data,
-        // and 'eventData.record.processed' is the field we're interested in.
-        const isProcessed = eventData.record?.processed;
+        if (error) throw error;
 
-        if (isProcessed === true) {
-            console.log("Order processed:", eventData.record);
-            // Add logic for processed order here (e.g., update application state, notify users)
-            return new Response(JSON.stringify({
-                status: 'success',
-                message: 'Order processed',
-                data: eventData.record  // Returning the processed order data
-            }), {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-        } else {
-            console.log("Order not processed:", eventData.record);
-            return new Response(JSON.stringify({
-                status: 'success',
-                message: 'Order not processed or processed field missing'
-            }), {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-        }
-    } catch (error) {
-        console.error("Error processing webhook:", error);
+        // Return the order data and its processed status
         return new Response(JSON.stringify({
-            status: 'error',
-            message: 'Error processing webhook data'
+            order: order,
+            processed: order ? order.processed : false
         }), {
-            status: 500,
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers: { 'Content-Type': 'application/json' },
+            status: 200
+        });
+    } catch (error) {
+        return new Response(JSON.stringify({ error: error.message }), {
+            headers: { 'Content-Type': 'application/json' },
+            status: 500
         });
     }
-}
-
-
-export async function GET() {
-    return new Response(JSON.stringify({
-        message: 'This endpoint is for webhook POST requests.'
-    }), {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
 }
