@@ -23,6 +23,8 @@
   function updateInputField() {
   inputFieldValue = selectedLetters.join(''); 
 }
+
+
 </script>
 <Header/>
 <section class="order-form">

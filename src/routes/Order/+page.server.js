@@ -27,7 +27,8 @@ export const actions = {
             userId: session.user.userId,
             letters: OrderContent,
             username: username,
-            orderDate: new Date()
+            orderDate: new Date(),
+            processed: false
         }
         const insert = await dbClient.insert(ordersTable).values(newOrder)
 

@@ -1,13 +1,13 @@
 <script>
   import NavBtn from "./NavBtn.svelte";
-  export let user;
+
 </script>
 
 <div class="header-container">
   
     <NavBtn content="Log Out" url="/logout" />
     <NavBtn content="Home" url="/" />
-  
+
 
     <NavBtn content="About" url="/about" />
     <NavBtn content="Privacy Policy" url="/privacy policy"/>

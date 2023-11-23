@@ -1,4 +1,5 @@
 // src/lib/server/schema.js
+import { boolean } from "drizzle-orm/mysql-core";
 import { pgTable, bigint, varchar, integer, timestamp } from "drizzle-orm/pg-core";
 
 
@@ -66,4 +67,7 @@ export const ordersTable = pgTable("order", {
         length: 255 
     }).notNull(),
     orderDate: timestamp("order_date"), 
+    processed: boolean("processed",{
+        defaultTo: false,
+    }),
 });
