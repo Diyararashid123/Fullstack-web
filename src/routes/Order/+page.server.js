@@ -7,6 +7,12 @@ export const load = async()=>{
         letters
     }
 }
+
+async function fetchData() {
+    const response = await fetch('/api/your-endpoint');
+    const data = await response.json();
+    
+  }
 export const actions = {
     default: async ({request, locals}) => {
         const data = await request.formData();
