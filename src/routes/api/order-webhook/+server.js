@@ -1,7 +1,8 @@
 // src/routes/api/order/[orderId].js
 
 // Import your existing database client setup here
-import { dbClient } from '$lib/dbClient'; // Adjust this path as per your setup
+import { dbClient } from '$lib/dbClient.js';
+
 
 export async function GET({ params }) {
     const { orderId } = params;
