@@ -1,3 +1,5 @@
+
+// GET request handler
 // Import the database client and schema
 import { dbClient } from "$lib/server/db";
 import { ordersTable } from "$lib/server/schema";
@@ -6,8 +8,9 @@ import { ordersTable } from "$lib/server/schema";
 export async function GET() {
     try {
         // Fetch all orders from the database
-        const orders = await dbClient.select('*').from(ordersTable);
-
+        console.log("Attempting to query the database");
+        const orders = await dbClient.select('orderId').from(ordersTable).limit(10);
+        console.log("Query executed", orders);
         return new Response(JSON.stringify(orders), {
             headers: { 'Content-Type': 'application/json' },
             status: 200
@@ -20,3 +23,14 @@ export async function GET() {
         });
     }
 }
+
+async function testDb() {
+    try {
+        const result = await dbClient.select('*').from(ordersTable);
+        console.log(result);
+    } catch (error) {
+        console.error("Error testing DB", error);
+    }
+}
+
+testDb();
