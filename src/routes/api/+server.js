@@ -1,4 +1,4 @@
-import {NextResponse} from "next/server";
+
 
 let data = {record: {email:"test12@gmail.com"}};
 
