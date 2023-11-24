@@ -5,18 +5,9 @@
   let thankYouClass = '';
   let inputFieldValue = '';
   let selectedLetters = []; 
-  let isSubmitted = false;
- 
-  let orderStatusMessage = isOrderProcessed
-      ? "Your order is done!"
-      : "Your order is being processed...";
-  async function handleSubmit() {
-    isSubmitted = true;
-    orderStatusMessage = "Please wait, processing your order...";
-    thankYouClass = 'thank-you-message-active'; 
 
-    
-  }
+ 
+
   function selectLetter(letter) {
     if (selectedLetters.length < 4) {
       let formattedLetter = `${letter.charachter} quantity ${letter.quantity}`;
