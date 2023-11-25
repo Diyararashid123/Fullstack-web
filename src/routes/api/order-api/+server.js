@@ -1,6 +1,6 @@
 
 import { createClient } from '@supabase/supabase-js';
-import { SUPABASE_URL, SUPABASE_KEY } from '$env/static/private';
+import {SUPABASE_KEY,SUPABASE_URL} from  '$env/static/private'
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -31,6 +31,7 @@ export async function POST(request) {
     try {
         // Parse the incoming webhook data
         const webhookData = await request.json();
+
 
 
         return new Response(null, { status: 200 });
