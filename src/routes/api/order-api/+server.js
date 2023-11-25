@@ -1,6 +1,6 @@
 
 import { createClient } from '@supabase/supabase-js';
-import {SUPABASE_KEY,SUPABASE_URL} from  '$env/static/private'
+import { SUPABASE_URL, SUPABASE_KEY } from '$env/static/private';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
