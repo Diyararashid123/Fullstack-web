@@ -5,7 +5,6 @@ import { DATABASE_URL } from '$env/static/private';
 
 // Set up the connection string
 const connectionString = DATABASE_URL;
-
 // Create the database client
 const supabaseClient = postgres(connectionString);
 
