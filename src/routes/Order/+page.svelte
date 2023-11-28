@@ -5,9 +5,12 @@
   let thankYouClass = '';
   let inputFieldValue = '';
   let selectedLetters = []; 
-
+  let isSubmitted = false;
  
-
+  function handleSubmit() {
+    isSubmitted = true;
+    thankYouClass = 'thank-you-message-active'; 
+  }
   function selectLetter(letter) {
     if (selectedLetters.length < 4) {
       let formattedLetter = `${letter.charachter} quantity ${letter.quantity}`;
@@ -55,13 +58,8 @@
     </form>
    {#if isSubmitted}
   <div class={`thank-you-message ${thankYouClass}`}>
-    {orderStatusMessage}
+   
   </div>
-{:else}
-  <form class='order' on:submit|preventDefault={handleSubmit}>
-    
-    <button type="submit">Submit Order</button>
-  </form>
 {/if}
 
 </section>
