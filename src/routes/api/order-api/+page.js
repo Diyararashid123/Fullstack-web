@@ -15,7 +15,7 @@ export async function load({ locals }) {
         .select()
         .from(ordersTable)
         .where('processed', '=', false)
-        .orderBy('order_date', 'asc') // Sort by order date
+        .orderBy('order_date', 'asc') 
         .execute();
 
     // Find the position of the user's most recent order in this list
