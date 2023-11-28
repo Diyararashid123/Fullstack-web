@@ -1,8 +1,7 @@
 <script>
   import Header from "../lib/components/Header.svelte";
-   import CustomBtn from "../lib/components/CustomBtn.svelte";
-   import { fly } from "svelte/transition";
-   import { quintOut } from "svelte/easing";
+  
+ 
    import { onMount } from 'svelte';
    
    export let data;
@@ -22,7 +21,6 @@
            <h2>Innovative Engineering</h2>
            <hr>
            <p>Our journey began with a team of five passionate engineers, each bringing unique expertise to the table. Together, we embarked on an ambitious project to create a state-of-the-art robotic arm. Our creation isn't just a marvel of technology; it's a testament to human ingenuity and collaboration. Through rigorous design, testing, and refinement, we've developed a robot that's not only highly efficient but also user-friendly, offering an interactive experience unlike any other.</p>
-
        </div>
        
        <img src="/robot-1.jpg" alt="bed" class="grid-img">
@@ -63,13 +61,7 @@
    color: white;
   
  }
-   
-   *{
-     margin: 0;
-     padding: 0;
-     box-sizing: border-box;
-   
-   }
+ 
  
    :root{
      --text: #e8ebed;
@@ -106,7 +98,6 @@
    .hero::before{
      background-image: url("/page1.PNG");
      filter: brightness(50%) contrast(110%);
-    
    }
  
    .grid{
@@ -273,5 +264,50 @@ a:hover::before{
      font-size: clamp(1rem, 2vw, 4rem);
      z-index: 1;
    }
+
+   @media screen and (max-width: 428px) { 
+
+  .main-container {
+    padding: 1rem;
+  }
+  .hero-header {
+    font-size: 1.5rem; /* Smaller size for mobile devices */
+  }
+.grid-content > p {
+    font-size: 0.9rem; /* Smaller size for mobile devices */
+  }
+
+  .grid {
+    grid-template-columns: 1fr; 
+    width: 100%; 
+  }
+
+  .grid-content {
+    max-width: 100%; 
+    padding: 0 1rem; 
+  }
+
+
+  .grid-img {
+    width: 100%;
+    height: auto;
+  }
+
+
+  .btn {
+    width: 100%; 
+    padding: 1rem; 
+  }
+
+  .btn a {
+    font-size: 1.2rem; 
+  }
+
+
+  .hero-header {
+    font-size: 2rem; 
+  }
+
+  }
  </style>
  

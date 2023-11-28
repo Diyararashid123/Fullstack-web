@@ -70,6 +70,7 @@
 </script>
 
 <Header/>
+
 <div class="card-container">
   {#each cardsData as card, index}  
       <div 
