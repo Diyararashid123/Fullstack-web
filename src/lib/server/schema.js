@@ -71,3 +71,22 @@ export const ordersTable = pgTable("order", {
         defaultTo: false,
     }),
 });
+
+export const processedOrdersTable = pgTable("processed_order", {
+    orderId: varchar("order_id", {
+        length: 50
+    }).primaryKey(),
+    userId: varchar("user_id", {
+        length: 15
+    })
+    .notNull()
+    .references(() => usersTable.id),
+    username: varchar("username", {
+        length: 50 
+    }).notNull(),
+    letters: varchar("letters", {
+        length: 255 
+    }).notNull(),
+    orderDate: timestamp("order_date"), 
+    processedDate: timestamp("processed_date") 
+});

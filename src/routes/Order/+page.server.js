@@ -11,8 +11,8 @@ export const load = async({ locals }) => {
     if (!session) {
         return {
             status: 401,
-            letters,
-            isOrderProcessed: false
+            letters
+         
         };
     }
     
