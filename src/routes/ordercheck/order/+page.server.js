@@ -5,8 +5,9 @@ import { eq } from "drizzle-orm";
 export const load = async ({ locals }) => {
   // Validate the user session
   const session = await locals.auth.validate();
+  console.log('Session in Load Function:', session);
   if (!session) {
-    // If there is no valid session, return a 401 status with an empty order list
+
     return {
       status: 401,
       body: {
@@ -15,16 +16,13 @@ export const load = async ({ locals }) => {
     };
   }
 
-
   const userId = session.user.userId;
-
 
   const orderprocessed = await dbClient
     .select()
     .from(processedOrdersTable)
     .where(eq(processedOrdersTable.userId, userId)) 
     .execute(); 
-
 
   return {
     body: {
