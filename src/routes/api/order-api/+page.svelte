@@ -2,7 +2,10 @@
   export let data;
   import { createClient } from "@supabase/supabase-js";
 
-  const supabase = createClient('https://wolrwotpqfgrxtgpjljx.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndvbHJ3b3RwcWZncnh0Z3BqbGp4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTk2NDQzNDMsImV4cCI6MjAxNTIyMDM0M30.gRkJ0nzQFEKciaVLRCD9aMWc-2Ufb6GYKP5RvM_1bW8');
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANNON_KEY = import.meta.env.VITE_SUPABASE_ANNON_KEY;
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANNON_KEY);
 
   const handleUpdate = (payload) => {
     if (payload.new.processed) {
