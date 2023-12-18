@@ -4,26 +4,26 @@
   import Header from '../../lib/components/Header.svelte';
   let thankYouClass = '';
   let inputFieldValue = '';
-  let selectedLetters = []; 
+
   let isSubmitted = false;
  
   function handleSubmit() {
     isSubmitted = true;
     thankYouClass = 'thank-you-message-active'; 
   }
-  function selectLetter(letter) {
-    if (selectedLetters.length < 4) {
-      let formattedLetter = `${letter.charachter} quantity ${letter.quantity}`;
-    selectedLetters = [...selectedLetters, formattedLetter];
-    } else {
-      console.log("You can't select more than 4 letters!");
-    }
-  }
+
 
   function updateInputField() {
   inputFieldValue = selectedLetters.join(''); 
 }
-
+$: if (inputFieldValue) {
+    inputFieldValue = inputFieldValue
+      .toUpperCase()
+      .split("")
+      .filter((char) => char >= "A" && char <= "G")
+      .slice(0, 4)
+      .join("");
+  }
 
 </script>
 <Header/>
@@ -43,10 +43,10 @@
         <div class="alphabet-selection">
             {#each data.letters as letter}
             <div class="letter-container">
-              <button class="btn" type="button" on:click={() => selectLetter(letter.charachter)}>
+              <button class="btn" type="button" on:click={() =>(letter.charachter)}>
                   <a href={letter.url}>{letter.charachter}</a>
               </button>
-              <p class="quantity">{letter.quantity}</p>
+              
           </div>
           
             {/each}
