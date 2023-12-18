@@ -3,7 +3,7 @@ import { processedOrdersTable } from '../../../lib/server/schema.js';
 import { eq } from "drizzle-orm";
 
 export const load = async ({ locals }) => {
-  // Validate the user session
+ 
   const session = await locals.auth.validate();
   console.log('Session in Load Function:', session);
   if (!session) {
@@ -15,6 +15,7 @@ export const load = async ({ locals }) => {
       }
     };
   }
+  
 
   const userId = session.user.userId;
 

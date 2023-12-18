@@ -11,35 +11,45 @@
  </script>
  
  <Header user = {data.session.user}/>
- 
  <div class="main-container">
-   <div class="hero">
-       <h1 class="hero-header" style="z-index: 99;">Welcome to Robotic Arm</h1>
-     </div>
-   <div class="grid">
-       <div class="grid-content">
-           <h2>Innovative Engineering</h2>
-           <hr>
-           <p>Our journey began with a team of five passionate engineers, each bringing unique expertise to the table. Together, we embarked on an ambitious project to create a state-of-the-art robotic arm. Our creation isn't just a marvel of technology; it's a testament to human ingenuity and collaboration. Through rigorous design, testing, and refinement, we've developed a robot that's not only highly efficient but also user-friendly, offering an interactive experience unlike any other.</p>
-       </div>
-       
-       <img src="/robot-1.jpg" alt="bed" class="grid-img">
-       <img src="/robot-2.jpg" alt="Picutre of bench in an outdoor park" class="grid-img">
-       <div class="grid-content">
-           <h2 style="z-index: 99;">Advanced Systems</h2>
-           <hr>
-           <p>At the core of our robotic arm is an advanced system, designed to handle complex tasks with precision and ease. Equipped with cutting-edge sensors and AI-driven algorithms, the robot can perform a wide range of actions, from intricate assembly tasks to interacting with users in real-time. Its versatility makes it ideal for various applications, from industrial settings to educational demonstrations.</p>
-       </div>
-       <div class="grid-content">
-        <h2>Project Development</h2>
-         <hr>
-         <p>Our goal is to continually advance this project, pushing the boundaries of robotic technology. We're committed to refining our design, enhancing functionality, and ensuring that our robotic arm remains at the forefront of the industry. By embracing innovation and valuing feedback, we strive to make our robotic arm an indispensable tool in various sectors. Join us in this exciting journey of technological evolution.</p>
-         <div class= "btn"  style="display grid; place-items: center; width: 65%;">
-          <a  href="/Order">Place Order</a></div>
-     </div>
-     <img src="/robot-3.jpg" alt="bed" class="grid-img">
-   </div>
- </div>
+  <div class="hero">
+    <h1 class="hero-header">Welcome to Robotic Arm</h1>
+  </div>
+  <div class="grid">
+    <div class="item1">
+      <img src="/robot-1.jpg" alt="Detailed view of the robotic arm's mechanics" class="grid-img">
+      <div class="grid-content">
+      <h2>Innovative Engineering</h2>
+      <hr>
+      <p>Our journey began with a team of five passionate engineers, each bringing unique expertise to the table. Together, we embarked on an ambitious project to create a state-of-the-art robotic arm. Our creation isn't just a marvel of technology; it's a testament to human ingenuity and collaboration. Through rigorous design, testing, and refinement, we've developed a robot that's not only highly efficient but also user-friendly, offering an interactive experience unlike any other.</p>
+    </div>
+  </div>
+  
+  <div class="item2">
+    <img src="/robot-2.jpg" alt="Robotic arm performing an assembly task" class="grid-img">
+    <div class="grid-content">
+      <h2>Advanced Systems</h2>
+      <hr>
+      <p>At the core of our robotic arm is an advanced system, designed to handle complex tasks with precision and ease. Equipped with cutting-edge sensors and AI-driven algorithms, the robot can perform a wide range of actions, from intricate assembly tasks to interacting with users in real-time. Its versatility makes it ideal for various applications, from industrial settings to educational demonstrations.</p>
+    </div>
+  </div>
+   
+
+  <div class="item3">
+    <img src="/robot-3.jpg" alt="Robotic arm in an industrial setting" class="grid-img">
+    <div class="grid-content">
+      <h2>Project Development</h2>
+      <hr>
+      <p>Our goal is to continually advance this project, pushing the boundaries of robotic technology. We're committed to refining our design, enhancing functionality, and ensuring that our robotic arm remains at the forefront of the industry. By embracing innovation and valuing feedback, we strive to make our robotic arm an indispensable tool in various sectors. Join us in this exciting journey of technological evolution.</p>
+    </div>
+  </div>
+      
+    </div>
+    <div class="btn" style="display: grid; place-items: center; width: 65%;">
+      <a href="/Order">Place Order</a>
+    </div>
+  </div>
+
  
  <style>
      
@@ -99,18 +109,32 @@
      background-image: url("/page1.PNG");
      filter: brightness(50%) contrast(110%);
    }
- 
-   .grid{
-     display: grid;
+   .grid {
+    display: grid;
      justify-content: center;
-     grid-template-columns: repeat(2, 1fr);
-     gap: 1rem;
+  grid-template-areas: 
+    "item1 item1"
+    "item2 item2"
+    "item3 item3"
+    "order order";
+    gap: 1rem;
      row-gap: 5rem;
      width: 80%;
      justify-self: center;
      letter-spacing: 2px;
      
-   }
+}
+.item1, .item2, .item3 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.item1 { grid-area: item1; }
+.item2 { grid-area: item2; }
+.item3 { grid-area: item3; }
+.item1, .item3 {
+  flex-direction: row-reverse;
+}
  
    .grid-content{
      max-width: 70%;
@@ -119,15 +143,17 @@
    }
    .grid-content > p{
      line-height: 1.6;
+     text-align: center;
    }
    .grid-content > h2{
      text-align: center;
      margin-bottom: 1rem;
    }
    .grid-img{
-     width: 100%;
-     align-self: center;
-    
+    max-width: 50%;
+  height: auto; 
+  display: block; 
+  margin: 0 auto;
    }
  
    .main-container{
@@ -135,6 +161,7 @@
      display: grid;
      gap: 1rem;
      padding: 1rem 6rem;
+     
    }
  
   
@@ -164,14 +191,13 @@ border-top: 1px solid rgba(250, 52, 52, 0.1);
 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 z-index:10;
 color: #fff;
-border-radius: 30px;
+border-radius: 4rem;
 font-weight: 400;
 letter-spacing: 1px;
 text-decoration: none;
 transition: 0.5s;
 overflow: hidden;
 backdrop-filter: blur(15px);
-
 }
 
 .btn a::before {
@@ -265,49 +291,19 @@ a:hover::before{
      z-index: 1;
    }
 
-   @media screen and (max-width: 428px) { 
-
-  .main-container {
-    padding: 1rem;
-  }
-  .hero-header {
-    font-size: 1.5rem; /* Smaller size for mobile devices */
-  }
-.grid-content > p {
-    font-size: 0.9rem; /* Smaller size for mobile devices */
+   @media screen and (max-width: 1024px) {
+    .item1, .item2, .item3 {
+    flex-direction: column; /* Stack image and text vertically */
   }
 
-  .grid {
-    grid-template-columns: 1fr; 
-    width: 100%; 
+  .grid-img, .grid-content {
+    max-width: 90%; /* Adjust as needed for smaller screens */
   }
-
-  .grid-content {
-    max-width: 100%; 
-    padding: 0 1rem; 
-  }
-
-
-  .grid-img {
-    width: 100%;
-    height: auto;
-  }
-
-
   .btn {
-    width: 100%; 
-    padding: 1rem; 
+    left: 9rem;
   }
-
-  .btn a {
-    font-size: 1.2rem; 
-  }
-
-
-  .hero-header {
-    font-size: 2rem; 
-  }
-
-  }
+   
+  } 
+   
  </style>
  

@@ -2,118 +2,81 @@
   export let content;
   export let url;
 </script>
-<div class="btn">
-<a href={url}>{content}</a>
-</div>
-<style>
 
-.btn {
-  position: relative;
-  width: 155px;
-  height: 50px;
- margin: 20px;
+<a href={url} class="button1">{content}</a>
+
+<style>
+.button1{
+text-decoration: none;
+position: relative;
+width: 250px;
+height: 80px;
+margin-top: 3rem;
+text-align: center;
+line-height: 80px;
+color: #000; 
+border: 4px solid #6d4c41; 
+border-radius: 2rem;
+font-size: 24px;
+letter-spacing: 2px; 
+text-transform: uppercase;
+transition: all 1.5s;
+overflow: hidden;
+z-index: 1;
+background-color: #8f470d; 
+box-shadow: 0px 0prgb(87, 43, 7)rgba(0,198,255, 0.3); 
 }
 
-.btn a{
-display: flex;
-justify-content: center;
-align-items: center;
+.button1:before {
+content: "";
 position: absolute;
 top: 0;
 left: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(255, 255, 255, 0.051);
-box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-border-top: 1px solid rgba(250, 52, 52, 0.1);
-border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-z-index:10;
-color: #fff;
-border-radius: 30px;
-font-weight: 400;
-letter-spacing: 1px;
-text-decoration: none;
-transition: 0.5s;
-overflow: hidden;
-backdrop-filter: blur(15px);
+bottom: 0;
+right: 0;
+border-top: 40px solid black; 
+border-bottom: 40px solid black;
+border-right: 40px solid transparent;
+transition: all 1.5s;
+transform: translateX(-100%);
+z-index: -1;
+
 }
 
-.btn a::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background:linear-gradient(to left, rgba(255,255,255,0.149), transparent);
-  transform: skewX(45deg);
-  transition: 0.5s;
-  transition-delay: 0.5s;
+.button1:hover:before {
+transform: translateX(0%);
+z-index: -1;
+
 }
 
-.btn:hover a {
-  letter-spacing: 3px;
+.button1:after {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+bottom: 0;
+right: 0;
+border-top: 40px solid black; 
+border-bottom: 40px solid black; 
+border-left: 40px solid transparent;
+transition: all 1.5s;
+transform: translateX(100%);
+z-index: -1;
+
 }
 
-a:hover::before{
-  transform: skewX(45deg) translateX(200%);
-  transition-delay: 0.5s;
+.button1:hover:after {
+transform: translateX(0%);
+z-index: -1;
+
 }
 
-.btn::before{
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #50C878;
-  bottom: -5px;
-  width: 30px;
-  height: 10px;
-  border-radius: 10px;
-  transition: 0.5s;
-  transition-delay: 0s;
+.button1:hover {
+  color: rgb(158, 105, 51);
+  border-color: #946f53;
+  background-color: black;
+  box-shadow: 0px 0px 15px rgba(255, 153, 0, 0.5);
+  text-shadow: 1px 1px 4px #75553f;
+
 }
-
-
-.btn:hover::before{
-  bottom: 0px;
-  height: 50%;
-  width: 80%;
-  border-radius: 30px;
-  transition-delay: 0.5s;
-}
-
-
-.btn::after{
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #50C878;
-  top: -5px;
-  width: 30px;
-  height: 10px;
-  border-radius: 10px;
-  transition: 0.5s;
-  transition-delay: 0s;
-}
-
-.btn:hover::after{
-  top: 0px;
-  height: 50%;
-  width: 80%;
-  border-radius: 30px;
-  transition-delay: 0.5s;
-}
-
-
-
-.btn::before,
-.btn::after,
-.btn:nth-child(1)::before,
-.btn:nth-child(1)::after{
-  background: #800080;
-  box-shadow: none;
-}
-
 </style>

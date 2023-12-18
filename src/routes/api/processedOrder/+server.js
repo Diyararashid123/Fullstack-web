@@ -1,11 +1,11 @@
 // src/routes/api/processedOrders/+server.js
 import { dbClient } from '$lib/server/db';
 import { processedOrdersTable } from '$lib/server/schema';
-import { auth } from '$lib/server/lucia';
+
 import { eq } from 'drizzle-orm';
 
-export async function GET({ request, locals }) {
-    // Validate the user session
+export async function GET({ locals }) {
+
     const session = await locals.auth.validate();
     if (!session) {
         return new Response(JSON.stringify({ error: "Unauthorized" }), {
@@ -16,7 +16,7 @@ export async function GET({ request, locals }) {
 
     const userId = session.user.userId;
 
-    // Fetch orders for the authenticated user
+    
     const processedOrders = await dbClient
         .select()
         .from(processedOrdersTable)

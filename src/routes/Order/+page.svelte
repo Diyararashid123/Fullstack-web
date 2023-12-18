@@ -55,12 +55,15 @@
     <form class='order' use:enhance method="POST" on:submit|preventDefault={handleSubmit}>
         <input name="order-content" type="text" placeholder="Submit here" bind:value={inputFieldValue}>
         <button type="submit">Submit Order</button>
+        <div><a  href="/ordercheck/order">Check order status</a></div>
     </form>
-   {#if isSubmitted}
-  <div class={`thank-you-message ${thankYouClass}`}>
-   
-  </div>
-{/if}
+    {#if isSubmitted}
+    <div class={`thank-you-message ${thankYouClass}`}>
+      <p>Thank you for your order!</p>
+      <p>If you want to track your order, you can press the "Check Order Status" button below to go to the order check page.</p>
+      <a href="/ordercheck/order" class="order-status-link">Check Order Status</a>
+    </div>
+  {/if}
 
 </section>
 
@@ -222,7 +225,7 @@ button[type="submit"]:hover {
   margin: 20px auto;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.051);
-  border-radius: 10px;
+  border-radius: 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: #fff;
   font-family: Arial, sans-serif;
@@ -256,7 +259,6 @@ button[type="submit"]:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   border-top: 1px solid rgba(250, 52, 52, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -352,5 +354,27 @@ h1{
   box-shadow: none;
 }
 
+@media screen and (max-width: 1024px) {
+  .order-instructions {
+    margin: 20px auto;
+    padding: 1rem;
+    max-width: 100%;
+    line-height: 1.3;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    z-index: 10;
+  }
+
+  .order-instructions p, .order-instructions ol {
+    width: 100%; 
+  }
+
+  .order-instructions ol {
+    list-style-position: inside; 
+  }
+}
 
 </style>

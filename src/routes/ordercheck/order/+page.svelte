@@ -1,8 +1,9 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
+  import Header from '../../../lib/components/Header.svelte';
 
-  export let data; // Initial data from the backend
-  let localData = data; // Local copy of the data to be updated by polling
+  export let data; 
+  let localData = data; 
 
   async function fetchProcessedOrders() {
     const sessionToken = localStorage.getItem('sessionToken');
@@ -22,9 +23,7 @@
     }
   }
   
-  function isOrderProcessedToday(order) {
-    return isToday(new Date(order.processedDate));
-  }
+
 
   let intervalId;
   onMount(() => {
@@ -36,7 +35,7 @@
     clearInterval(intervalId);
   });
 </script>
-
+<Header/>
 <h2>Processed Orders</h2>
 {#if localData && localData.length}
   <div class="orders">

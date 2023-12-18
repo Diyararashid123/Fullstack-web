@@ -3,7 +3,7 @@
   import { spring } from 'svelte/motion';
   import Header from '../../lib/components/Header.svelte';
   
-  let y = spring(-500, { stiffness: 0.009, damping: 0.25 });
+  let y = spring(-500, { stiffness: 0.009, damping: 0.1 });
   let flippedStates = [false, false, false, false, false];  
 
   let activeCardIndex = null;
@@ -27,23 +27,23 @@
 
   const cardsData = [
     { 
-      image: "1.jpg", 
+      image: "1.png", 
       name: "Diyara Rashid", 
       role: "Founder", 
-      workexplanation: "Diyara led the development of both the front-end and back-end of the web application, ensuring smooth user experience and reliable data management. With extensive expertise in web technologies, Diyara ensured the platform's robustness and scalability.",
+      workexplanation: "The Full Stack Developer, in this scenario, demonstrates a comprehensive skill set in web application development. He is adept in managing both front-end and back-end aspects, ensuring a seamless user experience and efficient data management. His expertise extends to database management, API development, and programming robots. This diverse skill set underlines his capacity to handle various technological challenges and contribute significantly to the development and scalability of web platforms.",
       description: "Diyara Rashid the Full Stack Developer" ,
       icon: "fas fa-laptop-code",
     },
     { 
-      image: "2.jpeg", 
-      name: "Sara", 
-      role: "Database Founder", 
-      workexplanation: "Sara was instrumental in setting up the foundational structure of the database. With a focus on data integrity and security, Sara ensured the reliable storage and retrieval of data, making it the backbone of the entire project.",
-      description: "Sara is responsible for taking care of the database.", 
-      icon: "fas fa-database",
+      image: "2.png", 
+      name: "Albin", 
+      role: "Network Specialist", 
+      workexplanation: "Albin, in his role as a Network Specialist, played a pivotal role in setting up and optimizing the network infrastructure. His expertise was critical in integrating advanced technology, such as the Raspberry Pi and robotics, into the network. Albin ensured seamless communication and robust security across all networked devices, proving indispensable in managing and securing complex network systems.",
+      description: "Managed the network connections to interface with the Raspberry Pi.",
+      icon: "fas fa-network-wired",
     },
     { 
-      image: "3.jpeg", 
+      image: "3.png", 
       name: "Osama", 
       role: "Circuit Systems Architect", 
       workexplanation: "Osama played a critical role in establishing the network architecture. By optimizing the connections and ensuring robust security measures, Osama made sure the platform communicated flawlessly with external devices like the Raspberry Pi.",
@@ -51,15 +51,7 @@
       icon: "fas fa-microchip",
     },
     { 
-      image: "4.jpeg", 
-      name: "Albin", 
-      role: "Network Specialist", 
-      workexplanation: "Albin played a critical role in establishing the network architecture. By optimizing the connections and ensuring robust security measures, Albin made sure the platform communicated flawlessly with external devices like the Raspberry Pi.",
-      description: "Managed the network connections to interface with the Raspberry Pi.",
-      icon: "fas fa-network-wired",
-    },
-    { 
-      image: "5.jpeg", 
+      image: "5.png", 
       name: "Jonatan",
       role: "PLC Expert", 
       workexplanation: "Specializing in Programmable Logic Controllers (PLC), Jonatan was the go-to expert for automation and machinery control. His expertise ensured that the PLC connections were efficient and reliable, driving the automated aspects of the project.",

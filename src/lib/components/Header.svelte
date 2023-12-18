@@ -11,6 +11,7 @@
 
     <NavBtn content="About" url="/about" />
     <NavBtn content="Privacy Policy" url="/privacy policy"/>
+    <NavBtn content="Orders status" url="/ordercheck/order"/>
   
 </div>
 
