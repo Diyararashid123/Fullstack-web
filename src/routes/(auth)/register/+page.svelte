@@ -1,6 +1,6 @@
 
 
-
+<div class="center-container">
 <div class="wrapper">
   <div class="form-wrapper sign-up">
     <form method="post">
@@ -20,6 +20,7 @@
     </form>
   </div>
 </div>
+</div>
 
 <style>
 	* {
@@ -28,7 +29,13 @@
 		box-sizing: border-box;
 		font-family: 'Poppins', sans-serif;
 	}
-	
+	.center-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+  }
+  
 	.wrapper {
 		display: flex;
 		position: relative;

@@ -60,3 +60,13 @@
     If you have any questions or concerns about this Privacy Policy or our data processing practices, please contact
   </p>
 </div>
+
+
+<style>
+
+h2,p,li{
+  padding: 0.3rem;
+  color:white;
+}
+
+</style>
